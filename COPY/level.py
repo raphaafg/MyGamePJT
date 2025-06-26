@@ -4,7 +4,7 @@
 import random
 import sys
 import pygame
-from code.const import COLOR_BLUESKY, COLOR_DARKGREEN, COLOR_ORANGEFIRE, ENEMY_SPAWN, EVENT_TIMEOUT, MENU_OPTION, SPAWN_TIME, STAGE_TIMEOUT, STEP_TIMEOUT, WIN_HEIGHT
+from code.const import COLOR_TURBOBLUE, COLOR_DARKGREEN, COLOR_ORANGEFIRE, ENEMY_SPAWN, EVENT_TIMEOUT, MENU_OPTION, SPAWN_TIME, STAGE_TIMEOUT, STEP_TIMEOUT, WIN_HEIGHT
 from code.enemy import Enemy
 from code.entity import Entity
 from code.entityFactory import EntityFactory
@@ -106,9 +106,9 @@ class Level:
             
             #printed text on the screen
             
-            self.level_text( 14, f'{self.name} - Timeout: {self.timeout / 1000:.0f}s', COLOR_BLUESKY,(10, 5)) #show the level name and timeout
-            self.level_text( 14, f'FPS: {clock.get_fps():.0f}', COLOR_BLUESKY,(10, WIN_HEIGHT - 30)) #show the current FPS
-            self.level_text( 14, f'Entidades: {len(self.entity_list)}', COLOR_BLUESKY,(10, WIN_HEIGHT - 45)) #show number of entities
+            self.level_text( 14, f'{self.name} - Timeout: {self.timeout / 1000:.0f}s', COLOR_TURBOBLUE,(10, 5)) #show the level name and timeout
+            self.level_text( 14, f'FPS: {clock.get_fps():.0f}', COLOR_TURBOBLUE,(10, WIN_HEIGHT - 30)) #show the current FPS
+            self.level_text( 14, f'Entidades: {len(self.entity_list)}', COLOR_TURBOBLUE,(10, WIN_HEIGHT - 45)) #show number of entities
             pygame.display.flip()
 
 

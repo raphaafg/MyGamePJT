@@ -2,7 +2,7 @@ import datetime
 import pygame
 
 from code.DBProxy import DBProxy
-from code.const import COLOR_BLUESKY, COLOR_BLUESPACE, COLOR_ORANGEFIRE, COLOR_PURPLE, FONT_OPTION_SIZE, FONT_TITLE_SIZE, MENU_OPTION, WIN_HEIGHT, WIN_SCORE_POS, WIN_WIDTH
+from code.const import COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_ORANGEFIRE, COLOR_FLAME, FONT_OPTION_SIZE, FONT_TITLE_SIZE, MENU_OPTION, WIN_HEIGHT, WIN_SCORE_POS, WIN_WIDTH
 
 
 class Score:
@@ -70,8 +70,8 @@ class Score:
             # Redraw only if input or prompt text has changed, or after an event
             if updated or namePlay != prev_namePlay or text != prev_text:
                 self.window.blit(source=self.surf, dest=self.rect)
-                self.score_text(FONT_TITLE_SIZE, "YOU WIN!", COLOR_PURPLE, WIN_SCORE_POS['Title'] )
-                self.score_text(20, text, COLOR_BLUESKY, WIN_SCORE_POS['EnterName'] )
+                self.score_text(FONT_TITLE_SIZE, "YOU WIN!", COLOR_FLAME, WIN_SCORE_POS['Title'] )
+                self.score_text(20, text, COLOR_TURBOBLUE, WIN_SCORE_POS['EnterName'] )
                 self.score_text(30, namePlay, COLOR_ORANGEFIRE, WIN_SCORE_POS['Name'] )
                 pygame.display.flip()
                 prev_namePlay = namePlay
@@ -84,9 +84,9 @@ class Score:
         pygame.mixer_music.load('./asset/Sound_score.wav')
         pygame.mixer_music.play(loops=-1) # Play the background music in a loop 
         self.window.blit(source=self.surf, dest=self.rect)
-        self.score_text(48, 'TOP 10 SCORE', COLOR_PURPLE, WIN_SCORE_POS['Title'])
-        self.score_text(20, 'NAME        SCORE                DATE            ', COLOR_PURPLE, WIN_SCORE_POS['Label'])
-        self.score_text(20, "Pess any key to return to Menu", COLOR_PURPLE,text_center_pos=((WIN_WIDTH/2), WIN_HEIGHT-30))
+        self.score_text(48, 'TOP 10 SCORE', COLOR_FLAME, WIN_SCORE_POS['Title'])
+        self.score_text(20, 'NAME        SCORE                DATE            ', COLOR_FLAME, WIN_SCORE_POS['Label'])
+        self.score_text(20, "Pess any key to return to Menu", COLOR_FLAME,text_center_pos=((WIN_WIDTH/2), WIN_HEIGHT-30))
 
         db_proxy = DBProxy('DBScore')
         list_score = db_proxy.retrieve_top10() #saving data from db to list_score
@@ -96,7 +96,7 @@ class Score:
 
         for player_score in list_score:
             id_, name, score, date = player_score #separando atraves do index da lista o conteudo
-            self.score_text(20, f'{name}         {score :05d}        {date}', COLOR_BLUESKY, WIN_SCORE_POS[list_score.index(player_score)])
+            self.score_text(20, f'{name}         {score :05d}        {date}', COLOR_TURBOBLUE, WIN_SCORE_POS[list_score.index(player_score)])
 
 
 

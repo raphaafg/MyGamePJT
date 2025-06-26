@@ -1,7 +1,13 @@
 import pygame
 
 #C
-
+COLOR_JET = (187, 50, 214)         # Roxo neon vibrante — ideal para títulos ou menus
+COLOR_BLUESKY = (167, 236, 255)       # Azul céu claro — ótimo para texto leve sobre fundo escuro
+COLOR_TURBOBLUE = (80, 50, 255)       # Azul profundo — para menus ou destaques
+COLOR_FLAME = (255, 94, 0)            # Laranja fogo — para avisos, boosts ou contagem regressiva
+COLOR_TURBOGREEN = (0, 255, 153)      # Verde neon — bom para feedback positivo ou velocidade
+COLOR_WHITE = (245, 245, 245)    # Branco acinzentado — texto neutro sobre fundo escuro
+COLOR_WARNINGYELLOW = (255, 209, 0)   # Amarelo alerta — ótimo para pontuação ou destaque
 
 #F
 FONT_TITLE_SIZE = 60  #Font size for the menu title
@@ -37,7 +43,7 @@ TIMEPUT_STAGE = 25000  #25s
 
 #W
 WIN_WIDTH = 700
-WIN_HEIGHT = 1000
+WIN_HEIGHT = 900
 
 WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 50),
                  'EnterName': (WIN_WIDTH/2, 90),
