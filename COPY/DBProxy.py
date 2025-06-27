@@ -22,7 +22,7 @@ class DBProxy:
         self.connection.commit()
 
     def retrieve_top10(self) -> list:
-        return self.connection.execute('SELECT * FROM dados ORDER BY score DESC LIMIT 10').fetchall()
+        return self.connection.execute('SELECT * FROM dados ORDER BY score DESC LIMIT 15').fetchall()
 
     def close(self):
         return self.connection.close()

@@ -9,6 +9,10 @@ COLOR_TURBOGREEN = (0, 255, 153)      # Verde neon — bom para feedback positiv
 COLOR_WHITE = (245, 245, 245)    # Branco acinzentado — texto neutro sobre fundo escuro
 COLOR_WARNINGYELLOW = (255, 209, 0)   # Amarelo alerta — ótimo para pontuação ou destaque
 
+#E
+
+
+
 #F
 FONT_TITLE_SIZE = 60  #Font size for the menu title
 FONT_OPTION_SIZE = 18  #Font size for the menu options
@@ -31,7 +35,7 @@ PLAYER_KEY_DOWN = {'Player1_DLC': pygame.K_DOWN, 'Player2_DLC': pygame.K_s}
 PLAYER_KEY_LEFT = {'Player1_DLC': pygame.K_LEFT, 'Player2_DLC': pygame.K_a}
 PLAYER_KEY_RIGHT = {'Player1_DLC': pygame.K_RIGHT, 'Player2_DLC': pygame.K_d}
 PLAYER_KEY_SHOOT = {'Player1_DLC': pygame.K_SPACE, 'Player2_DLC': pygame.K_LSHIFT}
-PLAYER_KEY_POWERUP = {'Player1_DLC': pygame.K_RCTRL, 'Player2_DLC': pygame.K_LCTRL}  
+PLAYER_KEY_CANCEL = {'Player1_DLC': pygame.K_RCTRL, 'Player2_DLC': pygame.K_LCTRL}  
 
 PROGRESSO_CHEGADA = 300 #Numero de Bg que devem ser decontados par ao final do jogo
 PROGRESSO_LARGADA = 0 #Numero de inicio do contador
@@ -39,25 +43,25 @@ PROGRESSO_LARGADA = 0 #Numero de inicio do contador
 #T
 TIME_SPAWN = 1300 #1.8s
 TIMEOUT_STEP = 100  #0.1s
-TIMEPUT_STAGE = 25000  #25s
+TIMEPUT_STAGE = 95000  #95s
 
 #W
 WIN_WIDTH = 700
 WIN_HEIGHT = 900
 
-WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 50),
-                 'EnterName': (WIN_WIDTH/2, 90),
-                 'Label': (WIN_WIDTH/2, 100),
-                 'Name': (WIN_WIDTH/2, 110),
-                 0: (WIN_WIDTH/2, 130), #0 a 9 referente ao index do lista ordenada
-                 1: (WIN_WIDTH/2, 150),
-                 2: (WIN_WIDTH/2, 170),
-                 3: (WIN_WIDTH/2, 190),
-                 4: (WIN_WIDTH/2, 210),
-                 5: (WIN_WIDTH/2, 230),
-                 6: (WIN_WIDTH/2, 250),
-                 7: (WIN_WIDTH/2, 270),
-                 8: (WIN_WIDTH/2, 290),
-                 9: (WIN_WIDTH/2, 310),            
+WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 100),
+                 'EnterName': (WIN_WIDTH/2, 120),
+                 'Label': (WIN_WIDTH/2, 140),
+                 'Name': (WIN_WIDTH/2, 160),
+                 0: (WIN_WIDTH/2, 200), #0 a 9 referente ao index do lista ordenada
+                 1: (WIN_WIDTH/2, 220),
+                 2: (WIN_WIDTH/2, 240),
+                 3: (WIN_WIDTH/2, 260),
+                 4: (WIN_WIDTH/2, 280),
+                 5: (WIN_WIDTH/2, 300),
+                 6: (WIN_WIDTH/2, 320),
+                 7: (WIN_WIDTH/2, 340),
+                 8: (WIN_WIDTH/2, 360),
+                 9: (WIN_WIDTH/2, 380),            
 
 }
