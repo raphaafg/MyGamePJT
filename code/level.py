@@ -4,7 +4,8 @@
 import random
 import sys
 import pygame
-from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, ENEMY_SPAWN, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2
+from code.background import Background
+from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2
 from code.enemy import Enemy
 from code.entity import Entity
 from code.entityFactory import EntityFactory
@@ -15,10 +16,21 @@ from code.player import Player
 class Level:
     def __init__(self, window: pygame.Surface, name: str, game_mode: str, player_score:list[int]):
         self.timeout = TIMEOUT_STAGE #ms = 95seconds
+        self.total_time = TIMEOUT_STAGE
+
         self.window = window
         self.name = name
         self.game_mode = game_mode #game mode selected in the menu (menu_option)
 
+        ##---------DEFINIÇÃO DAS FERRAMENTAS PARA PROGRESSO E BARRAS---------##
+        self.distance       = PROGRESSO_LARGADA
+        self.distance_goal  = PROGRESSO_CHEGADA
+         # 3) configurações das duas barras
+        self.time_bar_rect = pygame.Rect(10,  50, 30, 400)
+        self.dist_bar_rect = pygame.Rect(50,  50, 30, 400)
+        self.time_bar_col  = COLOR_FLAME      # cor do tempo
+        self.dist_bar_col  = COLOR_TURBOGREEN # cor da distância
+        self.bar_border    = COLOR_WHITE      # cor da borda das duas
 
 
         LEVEL_MAP = {
@@ -60,6 +72,7 @@ class Level:
         ##---------MAIN GAME LOOP---------##
         while True:
             clock.tick(60)
+            dt = clock.tick(60)
             self.window.fill((0,0,0)) #reset screen
 
             for ent in self.entity_list:
@@ -82,6 +95,40 @@ class Level:
                     self.level_text( 14, f'Player 2 -    Health: {ent.health}    Score: {ent.score}', COLOR_FLAME,(10, 35))
 
 
+
+
+                ##---------CREATING BAR PROGRESS---------##
+                for ent in self.entity_list:
+                    if isinstance(ent, Background):
+                        old_y = ent.rect.y
+                        ent.move()
+                        if ent.rect.y < 0 and old_y >= 0:
+                            self.distance += 1
+                    else:
+                        ent.move()
+
+                #desenha a barrinha de tempo
+                elapsed = self.total_time - self.timeout
+                h_time = elapsed * self.time_bar_rect.height // self.total_time
+                bar = self.time_bar_rect
+                fill = pygame.Rect(bar.x,bar.y + (bar.height - h_time),bar.width,h_time)
+                pygame.draw.rect(self.window, self.bar_border, bar, 2)
+                pygame.draw.rect(self.window, self.time_bar_col, fill)
+
+                #desenha a barrinha de distância
+                h_dist = self.distance * self.dist_bar_rect.height // self.distance_goal
+                bar = self.dist_bar_rect
+                fill = pygame.Rect(bar.x,bar.y + (bar.height - h_dist),bar.width,h_dist)
+                pygame.draw.rect(self.window, self.bar_border, bar, 2)
+                pygame.draw.rect(self.window, self.dist_bar_col, fill)
+
+                #checa vitória ou derrota
+                if self.distance >= self.distance_goal:
+                    return True   # chegou na linha de chegada antes do tempo: GANHOU
+                if self.timeout <= 0:
+                    return False  # acabou o tempo antes da chegada: PERDEU
+
+
                 
 
             ##---------CHECK FOR ALL EVENTS---------##
@@ -95,7 +142,7 @@ class Level:
                 ##---------SPAWN OF ENEMIES---------##
                 if event.type == ENEMY_SPAWN:
                     px = self.player.rect.centerx
-                    enemy = EntityFactory.get_entity('Enemy1',(px,0))
+                    enemy = EntityFactory.get_entity('Enemy1',(px,-200))
                     self.entity_list.append(enemy)
                     #choice = random.choice(['Enemy1', 'Enemy2'])  # Randomly choose an enemy type to spawn
                     #self.entity_list.append(EntityFactory.get_entity(choice))  #add a random enemy to the entity list
@@ -119,6 +166,8 @@ class Level:
                                 ent.score += ent.health  # Add the remaining health to the score
                                 player_score[1] = ent.score
                         return True  # Return True to indicate the level is finished
+                    
+            
 
                 ##---------CHECK PLAYER ALIVE---------##
                 found_player = False
@@ -129,15 +178,21 @@ class Level:
                     print('GAME OVER')
                     return False       
 
+
                 
+
+
            
             
             
             #printed text on the screen
-            
             self.level_text( 14, f'{self.name} - Timeout: {self.timeout / 1000:.0f}s', COLOR_TURBOBLUE,(10, 5)) #show the level name and timeout
             self.level_text( 14, f'FPS: {clock.get_fps():.0f}', COLOR_TURBOBLUE,(10, WIN_HEIGHT - 30)) #show the current FPS
             self.level_text( 14, f'Entidades: {len(self.entity_list)}', COLOR_TURBOBLUE,(10, WIN_HEIGHT - 45)) #show number of entities
+
+
+
+
             pygame.display.flip()
 
 

@@ -10,6 +10,7 @@ from code.playerShot import PlayerShot
 
 class EntityMediator: #design pattern factory doesnt need a init
     
+    _hit_cooldown = HIT_COOLDOWN
 
     @staticmethod 
     #method to verify if the entity is out of the screen, if so, it will set the health to 0
@@ -26,7 +27,7 @@ class EntityMediator: #design pattern factory doesnt need a init
             
     @staticmethod
     def __verify_collision_entity(ent1, ent2):
-        hit_cooldown = HIT_COOLDOWN
+        
         # Check if the entities are of types that can interact with each other
         valid_interaction = False #flag to check if the collision is valid
        
@@ -45,16 +46,16 @@ class EntityMediator: #design pattern factory doesnt need a init
             valid_interaction = True
                 
         elif isinstance(ent1, Player) and isinstance(ent2, Civilians):
-            hit_cooldown -= 1
-            if hit_cooldown == 0:
+            EntityMediator._hit_cooldown -= 1
+            if EntityMediator._hit_cooldown == 0:
                 valid_interaction = True
-                hit_cooldown = HIT_COOLDOWN
+                EntityMediator._hit_cooldown = HIT_COOLDOWN
                 
         elif isinstance(ent1, Civilians) and isinstance(ent2, Player):
-            hit_cooldown -= 1
-            if hit_cooldown == 0:
+            EntityMediator._hit_cooldown -= 1
+            if EntityMediator._hit_cooldown == 0:
                 valid_interaction = True
-                hit_cooldown = HIT_COOLDOWN
+                EntityMediator._hit_cooldown = HIT_COOLDOWN
                 
         
 
