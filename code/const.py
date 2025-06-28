@@ -112,7 +112,7 @@ FONT_OPTION_SIZE = 18  #Font size for the menu options
 FONT_HUD_SIZE = 20 #Font size for HUD
 
 #H
-HIT_COOLDOWN = 40 #Cool down for hits between entities (cars)
+HIT_COOLDOWN = 20 #Cool down for hits between entities (cars)
 
 #M
 MENU_OPTION = ( 'NEW GAME - 1P > ARCADE',

@@ -29,7 +29,7 @@ class EntityMediator: #design pattern factory doesnt need a init
         hit_cooldown = HIT_COOLDOWN
         # Check if the entities are of types that can interact with each other
         valid_interaction = False #flag to check if the collision is valid
-        cop_interaction = False
+       
         if isinstance(ent1, Enemy) and isinstance(ent2, PlayerShot):
             valid_interaction = True
         elif isinstance(ent1, PlayerShot) and isinstance(ent2, Enemy):
@@ -41,23 +41,27 @@ class EntityMediator: #design pattern factory doesnt need a init
         elif isinstance(ent1, Player) and isinstance(ent2, Enemy):
             hit_cooldown -= 1
             if hit_cooldown == 0:
-                hit_cooldown == HIT_COOLDOWN
-                cop_interaction = True
+                valid_interaction = True
+                hit_cooldown = HIT_COOLDOWN
+                
         elif isinstance(ent1, Enemy) and isinstance(ent2, Player):
             hit_cooldown -= 1
             if hit_cooldown == 0:
-                hit_cooldown == HIT_COOLDOWN
-                cop_interaction = True
+                valid_interaction = True
+                hit_cooldown = HIT_COOLDOWN
+                
         elif isinstance(ent1, Player) and isinstance(ent2, Civilians):
             hit_cooldown -= 1
             if hit_cooldown == 0:
-                hit_cooldown == HIT_COOLDOWN
                 valid_interaction = True
+                hit_cooldown = HIT_COOLDOWN
+                
         elif isinstance(ent1, Civilians) and isinstance(ent2, Player):
             hit_cooldown -= 1
             if hit_cooldown == 0:
-                hit_cooldown == HIT_COOLDOWN
                 valid_interaction = True
+                hit_cooldown = HIT_COOLDOWN
+                
         
 
         
@@ -75,14 +79,6 @@ class EntityMediator: #design pattern factory doesnt need a init
                 ent1.last_dmg = ent2.name
                 ent2.last_dmg = ent1.name
 
-
-        if cop_interaction:
-            if (ent1.rect.right >= ent2.rect.left and 
-                ent1.rect.left <= ent2.rect.right and 
-                ent1.rect.bottom >= ent2.rect.top and 
-                ent1.rect.top <= ent2.rect.bottom):
-                ent1.health == 0
-                ent2.health == 0
 
 
                 
