@@ -90,13 +90,13 @@ class EntityMediator: #design pattern factory doesnt need a init
 
     @staticmethod
     def __give_score(enemy: Enemy, entity_list: list[Entity]):
-        if enemy.last_dmg == 'Player1_DLCShot':
+        if enemy.last_dmg == 'PlayerA0Shot':
             for ent in entity_list:
-                if ent.name == 'Player1_DLC':
+                if ent.name == 'PlayerA0':
                     ent.score += enemy.score
-        elif enemy.last_dmg == 'Player2_DLCShot':
+        elif enemy.last_dmg == 'PlayerB0Shot':
             for ent in entity_list:
-                if ent.name == 'Player2_DLC':
+                if ent.name == 'PlayerB0':
                     ent.score += enemy.score
 
     @staticmethod

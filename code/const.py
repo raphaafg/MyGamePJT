@@ -16,7 +16,7 @@ EVENT_CIV_SPAWN = pygame.USEREVENT + 3
 
 
 ENTITY_SPEED = {
-    'Map10': 6,
+    'Map10': 5,
     'Map20': 6,
     'Map11': 10,
     'Map21': 8,
@@ -28,8 +28,8 @@ ENTITY_SPEED = {
     'PlayerB0Shot': 5,
     'Enemy1Shot': 3,
     'Enemy2Shot': 3,
-    'CIVILIAN1': 7, 
-    'CIVILIAN2': 7, 
+    'CIVILIAN1': 5, 
+    'CIVILIAN2': 6, 
     'CIVILIAN3': 7, 
     'CIVILIAN4': 7, 
     'CIVILIAN5': 7, 
@@ -60,7 +60,7 @@ ENTITY_HEALTH = {
 ENTITY_SHOT_DELAY = {
     'PlayerA0': 20,
     'PlayerB0': 30,
-    'Enemy1': 9000,
+    'Enemy1': 6000,
     'Enemy2': 1500,
 }
 
@@ -71,18 +71,18 @@ ENTITY_DAMAGE = {
     'Map21': 0,
     'PlayerA0': 5,
     'PlayerB0': 5,
-    'Enemy1': 10,
-    'Enemy2': 15,
+    'Enemy1': 999,
+    'Enemy2': 999,
     'PlayerA0Shot': 20,
     'PlayerB0Shot': 25,
     'Enemy1Shot': 20,
     'Enemy2Shot': 30,
-    'CIVILIAN1': 10, 
-    'CIVILIAN2': 10, 
-    'CIVILIAN3': 10, 
-    'CIVILIAN4': 10, 
-    'CIVILIAN5': 10, 
-    'CIVILIAN6': 10, 
+    'CIVILIAN1': 15, 
+    'CIVILIAN2': 15, 
+    'CIVILIAN3': 15, 
+    'CIVILIAN4': 15, 
+    'CIVILIAN5': 15, 
+    'CIVILIAN6': 15, 
 }
 
 ENTITY_SCORE = {
@@ -125,8 +125,8 @@ MENU_OPTION = ( 'NEW GAME - 1P > ARCADE',
 #P
 PLAYER_KEY_UP = {'PlayerA0': pygame.K_UP, 'PlayerB0': pygame.K_w}
 PLAYER_KEY_DOWN = {'PlayerA0': pygame.K_DOWN, 'PlayerB0': pygame.K_s}
-PLAYER_KEY_LEFT = {'PlayerA0': pygame.K_LEFT, 'PlayerB0': pygame.K_a}
-PLAYER_KEY_RIGHT = {'PlayerA0': pygame.K_RIGHT, 'PlayerB0': pygame.K_d}
+PLAYER_KEY_LEFT = {'PlayerA0': pygame.K_LEFT, 'PlayerB0': pygame.K_a,'Enemy1': pygame.K_LEFT}
+PLAYER_KEY_RIGHT = {'PlayerA0': pygame.K_RIGHT, 'PlayerB0': pygame.K_d, 'Enemy1': pygame.K_RIGHT}
 PLAYER_KEY_SHOOT = {'PlayerA0': pygame.K_SPACE, 'PlayerB0': pygame.K_LSHIFT}
 PLAYER_KEY_CANCEL = {'PlayerA0': pygame.K_RCTRL, 'PlayerB0': pygame.K_LCTRL}  
 
@@ -170,4 +170,4 @@ WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 100),
 }
 
 WIN_POSX_RUA1 = ((WIN_WIDTH/2) + 100)
-WIN_POSX_RUA2 = ((WIN_WIDTH/2) - 100)
+WIN_POSX_RUA2 = ((WIN_WIDTH/2) - 120)

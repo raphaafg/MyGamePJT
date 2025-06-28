@@ -65,6 +65,11 @@ class Level:
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)  # Draw each entity on the window
                 ent.move()
+                if isinstance(ent, Enemy):
+                    ent.move(entity_list=self.entity_list)
+                else:
+                    ent.move()
+
                 if isinstance(ent,(Player, Enemy)):
                     shoot = ent.shoot()  # If the entity is a player or enemy, check if it can shoot
                     if shoot is not None:
@@ -98,7 +103,7 @@ class Level:
                 ##---------SPAWN CIVILIANS---------##    
                 if event.type == EVENT_CIV_SPAWN:
                     x = random.choice([WIN_POSX_RUA1, WIN_POSX_RUA2])
-                    y = -50   # começa fora de tela, acima
+                    y = -200   # começa fora de tela, acima
                     civ = EntityFactory.get_entity('Civilians', position=(x,y))
                     self.entity_list.append(civ)  
 

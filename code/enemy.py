@@ -1,10 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import pygame
-from code.const import ENTITY_SHOT_DELAY, ENTITY_SPEED, WIN_HEIGHT, WIN_WIDTH
+from code.const import ENTITY_SHOT_DELAY, ENTITY_SPEED, PLAYER_KEY_LEFT, PLAYER_KEY_RIGHT, PLAYER_KEY_UP, WIN_HEIGHT, WIN_WIDTH
 from code.enemyShot import EnemyShot
 from code.entity import Entity
 import random
+
+from code.player import Player
 
 
 
@@ -36,3 +38,17 @@ class Enemy(Entity):
             self.shot_delay = ENTITY_SHOT_DELAY[self.name]
             self.shot_sound.play()
             return EnemyShot(name=f"{self.name}Shot", position=(self.rect.centerx, self.rect.centery))
+        
+    def move(self, entity_list=None):
+        # 1) sempre desce
+        self.rect.centery += ENTITY_SPEED[self.name]
+
+        # 2) procura o player1 na lista, se existir
+        if entity_list is not None:
+            p1 = next((e for e in entity_list if isinstance(e, Player)), None)
+            if p1:
+                # ajusta X para “seguir” o p1
+                if self.rect.centerx < p1.rect.centerx:
+                    self.rect.centerx += ENTITY_SPEED[self.name]
+                elif self.rect.centerx > p1.rect.centerx:
+                    self.rect.centerx -= ENTITY_SPEED[self.name]
