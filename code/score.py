@@ -85,7 +85,7 @@ class Score:
         pygame.mixer_music.play(loops=-1) # Play the background music in a loop 
         self.window.blit(source=self.surf, dest=self.rect)
         self.score_text(48, 'TOP 15 SCORE', COLOR_FLAME, WIN_SCORE_POS['Title'])
-        self.score_text(20, 'NAME        SCORE                DATE            ', COLOR_FLAME, WIN_SCORE_POS['Label'])
+        self.score_text(20, 'NAME        SCORE          DATE          ', COLOR_FLAME, WIN_SCORE_POS['Label'])
         self.score_text(20, "Pess any key to return to Menu", COLOR_FLAME,text_center_pos=((WIN_WIDTH/2), WIN_HEIGHT-30))
 
         db_proxy = DBProxy('DBScore')
@@ -96,7 +96,7 @@ class Score:
 
         for player_score in list_score:
             id_, name, score, date = player_score #separando atraves do index da lista o conteudo
-            self.score_text(20, f'{name}         {score :05d}        {date}', COLOR_TURBOBLUE, WIN_SCORE_POS[list_score.index(player_score)])
+            self.score_text(20, f'             {name}        {score :05d}         {date}             ', COLOR_TURBOBLUE, WIN_SCORE_POS[list_score.index(player_score)])
 
 
 

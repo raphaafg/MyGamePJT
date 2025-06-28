@@ -33,7 +33,7 @@ class Menu:
         menu_option = 0
         pygame.mixer_music.load('./assets/Sound_Menu1.wav') # Load the background music for the menu
         pygame.mixer_music.play(loops=-1) # Play the background music in a loop (-1 means loop indefinitely)
-        pygame.mixer_music.set_volume(0.2) 
+        pygame.mixer_music.set_volume(0.15) 
         while True:
 
             ##--------------DRAW---IMAGES--------------##

@@ -1,5 +1,6 @@
 import pygame
-from code.const import HIT_COOLDOWN, WIN_WIDTH
+from code.civilians import Civilians
+from code.const import HIT_COOLDOWN, WIN_HEIGHT, WIN_WIDTH
 from code.enemy import Enemy
 from code.enemyShot import EnemyShot
 from code.entity import Entity
@@ -14,13 +15,13 @@ class EntityMediator: #design pattern factory doesnt need a init
     #method to verify if the entity is out of the screen, if so, it will set the health to 0
     def __verify_collision_window(ent: Entity): #private method that just works inside this class
         if isinstance(ent, Enemy):
-            if ent.rect.right < 0:
+            if ent.rect.top > WIN_HEIGHT:
                 ent.health = 0
         if isinstance(ent, PlayerShot):
-            if ent.rect.left >= WIN_WIDTH:
+            if ent.rect.bottom <= 0:
                 ent.health = 0
         if isinstance(ent, EnemyShot):
-            if ent.rect.right < 0:
+            if ent.rect.top > WIN_HEIGHT:
                 ent.health = 0
             
     @staticmethod
@@ -28,6 +29,7 @@ class EntityMediator: #design pattern factory doesnt need a init
         hit_cooldown = HIT_COOLDOWN
         # Check if the entities are of types that can interact with each other
         valid_interaction = False #flag to check if the collision is valid
+        cop_interaction = False
         if isinstance(ent1, Enemy) and isinstance(ent2, PlayerShot):
             valid_interaction = True
         elif isinstance(ent1, PlayerShot) and isinstance(ent2, Enemy):
@@ -40,8 +42,18 @@ class EntityMediator: #design pattern factory doesnt need a init
             hit_cooldown -= 1
             if hit_cooldown == 0:
                 hit_cooldown == HIT_COOLDOWN
-                valid_interaction = True
+                cop_interaction = True
         elif isinstance(ent1, Enemy) and isinstance(ent2, Player):
+            hit_cooldown -= 1
+            if hit_cooldown == 0:
+                hit_cooldown == HIT_COOLDOWN
+                cop_interaction = True
+        elif isinstance(ent1, Player) and isinstance(ent2, Civilians):
+            hit_cooldown -= 1
+            if hit_cooldown == 0:
+                hit_cooldown == HIT_COOLDOWN
+                valid_interaction = True
+        elif isinstance(ent1, Civilians) and isinstance(ent2, Player):
             hit_cooldown -= 1
             if hit_cooldown == 0:
                 hit_cooldown == HIT_COOLDOWN
@@ -62,6 +74,16 @@ class EntityMediator: #design pattern factory doesnt need a init
                 # set the last damage source for both entities
                 ent1.last_dmg = ent2.name
                 ent2.last_dmg = ent1.name
+
+
+        if cop_interaction:
+            if (ent1.rect.right >= ent2.rect.left and 
+                ent1.rect.left <= ent2.rect.right and 
+                ent1.rect.bottom >= ent2.rect.top and 
+                ent1.rect.top <= ent2.rect.bottom):
+                ent1.health == 0
+                ent2.health == 0
+
 
                 
 
@@ -89,7 +111,7 @@ class EntityMediator: #design pattern factory doesnt need a init
     @staticmethod
     #method to verify the health of the entities, if the health is 0 or less, it will remove the entity from the list (destroy the entity)
     def verify_health(entity_list: list[Entity]):
-        hit_sound = pygame.mixer.Sound('./asset/Sound_hit.wav') # Load the shot sound for the player
+        hit_sound = pygame.mixer.Sound('./assets/Sound_hit.wav') # Load the shot sound for the player
         hit_sound.set_volume(0.3)
 
 

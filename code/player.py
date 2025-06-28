@@ -11,7 +11,7 @@ class Player(Entity):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)
         self.shot_delay = ENTITY_SHOT_DELAY[self.name]  # Set the shot delay for the player
-        self.shot_sound = pygame.mixer.Sound('./asset/' + name + '.wav') # Load the shot sound for the player
+        self.shot_sound = pygame.mixer.Sound('./assets/' + name + '.wav') # Load the shot sound for the player
         self.shot_sound.set_volume(0.3)  # Set the volume for the shot sound
         
         
@@ -23,9 +23,9 @@ class Player(Entity):
         #if I set ELIF here, the player will not be able to move diagonally, because it is if or another if. That way it is if and another if.
         if pressed_key[PLAYER_KEY_DOWN[self.name]] and self.rect.bottom < WIN_HEIGHT: 
             self.rect.centery += ENTITY_SPEED[self.name]
-        if pressed_key[PLAYER_KEY_LEFT[self.name]] and self.rect.left > 0:
+        if pressed_key[PLAYER_KEY_LEFT[self.name]] and self.rect.left > 100:
             self.rect.centerx -= ENTITY_SPEED[self.name]
-        if pressed_key[PLAYER_KEY_RIGHT[self.name]] and self.rect.right < WIN_WIDTH:
+        if pressed_key[PLAYER_KEY_RIGHT[self.name]] and self.rect.right < WIN_WIDTH-100:
             self.rect.centerx += ENTITY_SPEED[self.name]
         pass 
 
