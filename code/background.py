@@ -17,5 +17,5 @@ class Background(Entity):
                 
         if self.rect.top >= WIN_HEIGHT: 
             self.rect.bottom = 0
-            PROGRESSO_COUNT +=1
+            #PROGRESSO_COUNT +=1
       
