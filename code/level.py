@@ -76,12 +76,19 @@ class Level:
             self.window.fill((0,0,0)) #reset screen
 
             for ent in self.entity_list:
-                self.window.blit(source=ent.surf, dest=ent.rect)  # Draw each entity on the window
-                ent.move()
-                if isinstance(ent, Enemy):
+
+                if isinstance(ent, Background):
+                    old_y = ent.rect.y
+                    ent.move()
+                    if ent.rect.y < 0 and old_y >= 0:
+                        self.distance += 1
+
+                elif isinstance(ent, Enemy):
                     ent.move(entity_list=self.entity_list)
                 else:
                     ent.move()
+
+                self.window.blit(source=ent.surf, dest=ent.rect)  # Draw each entity on the window
 
                 if isinstance(ent,(Player, Enemy)):
                     shoot = ent.shoot()  # If the entity is a player or enemy, check if it can shoot
@@ -98,15 +105,6 @@ class Level:
 
 
                 ##---------CREATING BAR PROGRESS---------##
-                for ent in self.entity_list:
-                    if isinstance(ent, Background):
-                        old_y = ent.rect.y
-                        ent.move()
-                        if ent.rect.y < 0 and old_y >= 0:
-                            self.distance += 1
-                    else:
-                        ent.move()
-
                 #desenha a barrinha de tempo
                 elapsed = self.total_time - self.timeout
                 h_time = elapsed * self.time_bar_rect.height // self.total_time

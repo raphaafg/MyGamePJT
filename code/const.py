@@ -16,24 +16,24 @@ EVENT_CIV_SPAWN = pygame.USEREVENT + 3
 
 
 ENTITY_SPEED = {
-    'Map10': 3,
-    'Map20': 3,
-    'Map11': 5,
-    'Map21': 6,
-    'PlayerA0':4,
-    'PlayerB0':4,
+    'Map10': 10,
+    'Map20': 7,
+    'Map11': 8,
+    'Map21': 9,
+    'PlayerA0':5,
+    'PlayerB0':5,
     'Enemy1': 1,
     'Enemy2': 1,
     'PlayerA0Shot': 7,
     'PlayerB0Shot': 5,
     'Enemy1Shot': 3,
     'Enemy2Shot': 3,
-    'CIVILIAN1': 2, 
-    'CIVILIAN2': 2, 
-    'CIVILIAN3': 3, 
-    'CIVILIAN4': 3, 
-    'CIVILIAN5': 3, 
-    'CIVILIAN6': 3, 
+    'CIVILIAN1': 4, 
+    'CIVILIAN2': 4, 
+    'CIVILIAN3': 5, 
+    'CIVILIAN4': 6, 
+    'CIVILIAN5': 5, 
+    'CIVILIAN6': 5, 
 }
 
 ENTITY_HEALTH = {
@@ -112,7 +112,7 @@ FONT_OPTION_SIZE = 18  #Font size for the menu options
 FONT_HUD_SIZE = 20 #Font size for HUD
 
 #H
-HIT_COOLDOWN = 20 #Cool down for hits between entities (cars)
+HIT_COOLDOWN = 15 #Cool down for hits between entities (cars)
 
 #M
 MENU_OPTION = ( 'NEW GAME - 1P > ARCADE',
@@ -140,7 +140,7 @@ PROGRESSO_COUNT = 0
 TIME_ENEMY_SPAWN = 25000 
 TIMEOUT_STEP = 100  #0.1s
 TIMEOUT_STAGE = 120000  #90s
-TIME_CIVILIAN_SPAWN = 2500
+TIME_CIVILIAN_SPAWN = 5500
 
 #W
 WIN_WIDTH = 700

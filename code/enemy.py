@@ -21,16 +21,8 @@ class Enemy(Entity):
 
 
     def move(self, ): 
-# Move the enemy to the left but, set the enemy not destroyed by shot to the right side of the screen again closer to the player related to the time elapsed since spawn
-        
         self.rect.centery += ENTITY_SPEED[self.name]                
-        if self.rect.top <= 0: #if the top side of a image gets 0, set the left side to the final right again
-            if random.random() < 0.5: #50% chance to respawn the enemy
-                self.rect.bottom = WIN_HEIGHT
-                ##print(f'Enemy {self.name} respawned at {self.rect.left} after {elapsed_s:.2f}s')
-            else:
-                ##print(f'Enemy {self.name} destroyed)')
-                pass 
+        
 
     def shoot(self):
         self.shot_delay -= 1
