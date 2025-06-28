@@ -39,16 +39,10 @@ class EntityMediator: #design pattern factory doesnt need a init
         elif isinstance(ent1, Player) and isinstance(ent2, EnemyShot):
             valid_interaction = True
         elif isinstance(ent1, Player) and isinstance(ent2, Enemy):
-            hit_cooldown -= 1
-            if hit_cooldown == 0:
-                valid_interaction = True
-                hit_cooldown = HIT_COOLDOWN
+            valid_interaction = True
                 
         elif isinstance(ent1, Enemy) and isinstance(ent2, Player):
-            hit_cooldown -= 1
-            if hit_cooldown == 0:
-                valid_interaction = True
-                hit_cooldown = HIT_COOLDOWN
+            valid_interaction = True
                 
         elif isinstance(ent1, Player) and isinstance(ent2, Civilians):
             hit_cooldown -= 1
