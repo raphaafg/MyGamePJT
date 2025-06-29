@@ -17,10 +17,10 @@ class Civilians(Entity):
     def move(self):        
         self.rect.centery += ENTITY_SPEED[self.name]
         if self.rect.top >= WIN_HEIGHT: 
-            if random.random() < 0.5: #50% chance to respawn the enemy
+            if random.random() < 0.2: # 20% chance to respawn the civilian
                 self.rect.bottom = -200
-                print(f'Enemy {self.name} respawned ')
+                #print(f'Enemy {self.name} respawned ')
             else:
-                print(f'Enemy {self.name} destroyed)')
+                #print(f'Enemy {self.name} destroyed)')
                 pass
       

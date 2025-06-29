@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #C
 COLOR_JET = (187, 50, 214)         # Roxo neon vibrante — ideal para títulos ou menus
@@ -16,24 +17,25 @@ EVENT_CIV_SPAWN = pygame.USEREVENT + 3
 
 
 ENTITY_SPEED = {
-    'Map10': 10,
-    'Map20': 7,
+    'MAP01':8,
+    'Map10': 8,
+    'Map20': 5,
     'Map11': 8,
-    'Map21': 9,
-    'PlayerA0':5,
-    'PlayerB0':5,
+    'Map21': 7,
+    'PlayerA0':7,
+    'PlayerB0':7,
     'Enemy1': 1,
     'Enemy2': 1,
-    'PlayerA0Shot': 7,
+    'PlayerA0Shot': 5,
     'PlayerB0Shot': 5,
     'Enemy1Shot': 3,
     'Enemy2Shot': 3,
     'CIVILIAN1': 4, 
-    'CIVILIAN2': 4, 
-    'CIVILIAN3': 5, 
+    'CIVILIAN2': 5, 
+    'CIVILIAN3': 7, 
     'CIVILIAN4': 6, 
-    'CIVILIAN5': 5, 
-    'CIVILIAN6': 5, 
+    'CIVILIAN5': 6, 
+    'CIVILIAN6': 6, 
 }
 
 ENTITY_HEALTH = {
@@ -73,11 +75,11 @@ ENTITY_DAMAGE = {
     'PlayerB0': 5,
     'Enemy1': 999,
     'Enemy2': 999,
-    'PlayerA0Shot': 20,
-    'PlayerB0Shot': 25,
-    'Enemy1Shot': 20,
-    'Enemy2Shot': 30,
-    'CIVILIAN1': 15, 
+    'PlayerA0Shot': 999,
+    'PlayerB0Shot': 999,
+    'Enemy1Shot': 40,
+    'Enemy2Shot': 40,
+    'CIVILIAN1': 35, 
     'CIVILIAN2': 15, 
     'CIVILIAN3': 15, 
     'CIVILIAN4': 15, 
@@ -92,18 +94,18 @@ ENTITY_SCORE = {
     'Map21': 0,
     'PlayerA0': 0,
     'PlayerB0': 0,
-    'Enemy1': 100,
-    'Enemy2': 150,
+    'Enemy1': 200,
+    'Enemy2': 200,
     'PlayerA0Shot': 0,
     'PlayerB0Shot': 0,
     'Enemy1Shot': 0,
     'Enemy2Shot': 0,
-    'CIVILIAN1': 0, 
-    'CIVILIAN2': 0, 
-    'CIVILIAN3': 0, 
-    'CIVILIAN4': 0, 
-    'CIVILIAN5': 0, 
-    'CIVILIAN6': 0, 
+    'CIVILIAN1': -10, 
+    'CIVILIAN2': -10, 
+    'CIVILIAN3': -10, 
+    'CIVILIAN4': -10, 
+    'CIVILIAN5': -10, 
+    'CIVILIAN6': -10, 
 }
 
 #F
@@ -169,5 +171,8 @@ WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 100),
 
 }
 
-WIN_POSX_RUA1 = ((WIN_WIDTH/2) + 100)
-WIN_POSX_RUA2 = ((WIN_WIDTH/2) - 120)
+WIN_POSX_RUA1 = 100
+WIN_POSX_RUA2 = int(WIN_WIDTH / 2)
+WIN_POSX_RUA3 = 600
+
+

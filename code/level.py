@@ -5,7 +5,7 @@ import random
 import sys
 import pygame
 from code.background import Background
-from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2
+from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, ENTITY_SPEED, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2, WIN_POSX_RUA3
 from code.enemy import Enemy
 from code.entity import Entity
 from code.entityFactory import EntityFactory
@@ -26,9 +26,7 @@ class Level:
         self.distance       = PROGRESSO_LARGADA
         self.distance_goal  = PROGRESSO_CHEGADA
          # 3) configurações das duas barras
-        self.time_bar_rect = pygame.Rect(10,  50, 30, 400)
-        self.dist_bar_rect = pygame.Rect(50,  50, 30, 400)
-        self.time_bar_col  = COLOR_FLAME      # cor do tempo
+        self.dist_bar_rect = pygame.Rect(30,  200, 50, 500)
         self.dist_bar_col  = COLOR_TURBOGREEN # cor da distância
         self.bar_border    = COLOR_WHITE      # cor da borda das duas
 
@@ -72,16 +70,17 @@ class Level:
         ##---------MAIN GAME LOOP---------##
         while True:
             clock.tick(60)
-            dt = clock.tick(60)
             self.window.fill((0,0,0)) #reset screen
 
             for ent in self.entity_list:
 
                 if isinstance(ent, Background):
-                    old_y = ent.rect.y
+                    old_top = ent.rect.top
                     ent.move()
-                    if ent.rect.y < 0 and old_y >= 0:
+                    if ent.rect.top >= WIN_HEIGHT-ENTITY_SPEED[self.name]:
                         self.distance += 1
+                        print(f'distancia percorrida = {self.distance}')
+
 
                 elif isinstance(ent, Enemy):
                     ent.move(entity_list=self.entity_list)
@@ -105,19 +104,12 @@ class Level:
 
 
                 ##---------CREATING BAR PROGRESS---------##
-                #desenha a barrinha de tempo
-                elapsed = self.total_time - self.timeout
-                h_time = elapsed * self.time_bar_rect.height // self.total_time
-                bar = self.time_bar_rect
-                fill = pygame.Rect(bar.x,bar.y + (bar.height - h_time),bar.width,h_time)
-                pygame.draw.rect(self.window, self.bar_border, bar, 2)
-                pygame.draw.rect(self.window, self.time_bar_col, fill)
-
+                
                 #desenha a barrinha de distância
                 h_dist = self.distance * self.dist_bar_rect.height // self.distance_goal
                 bar = self.dist_bar_rect
                 fill = pygame.Rect(bar.x,bar.y + (bar.height - h_dist),bar.width,h_dist)
-                pygame.draw.rect(self.window, self.bar_border, bar, 2)
+                pygame.draw.rect(self.window, self.bar_border, bar, 4)
                 pygame.draw.rect(self.window, self.dist_bar_col, fill)
 
                 #checa vitória ou derrota
@@ -147,9 +139,12 @@ class Level:
                 
                 ##---------SPAWN CIVILIANS---------##    
                 if event.type == EVENT_CIV_SPAWN:
-                    x = random.choice([WIN_POSX_RUA1, WIN_POSX_RUA2])
+                    x1 = random.randint(WIN_POSX_RUA1, WIN_POSX_RUA2)
+                    x2 = random.randint(WIN_POSX_RUA2, WIN_POSX_RUA3)
+                    x = random.choice([x1, x2])
+                    #print(f'SPAWN AT {x}')
                     y = -200   # começa fora de tela, acima
-                    civ = EntityFactory.get_entity('Civilians', position=(x,y))
+                    civ = EntityFactory.get_entity('Civilians', position=(x, y))
                     self.entity_list.append(civ)  
 
                 ##---------TIMEOUT EVENT---------##
