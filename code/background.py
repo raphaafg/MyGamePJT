@@ -17,5 +17,5 @@ class Background(Entity):
         #it is necessary to set self.name because it is a dict and the key is the name to reach the value (speed) of the dict ENTITY_SPEED
                 
         if self.rect.top >= WIN_HEIGHT: 
-            self.rect.bottom = 0
+            self.rect.bottom = 10
             

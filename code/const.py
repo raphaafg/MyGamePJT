@@ -30,12 +30,12 @@ ENTITY_SPEED = {
     'PlayerB0Shot': 5,
     'Enemy1Shot': 3,
     'Enemy2Shot': 3,
-    'CIVILIAN1': 4, 
-    'CIVILIAN2': 5, 
-    'CIVILIAN3': 7, 
-    'CIVILIAN4': 6, 
-    'CIVILIAN5': 6, 
-    'CIVILIAN6': 6, 
+    'CIVILIAN1': 8, 
+    'CIVILIAN2': 9, 
+    'CIVILIAN3': 12, 
+    'CIVILIAN4':10, 
+    'CIVILIAN5': 10, 
+    'CIVILIAN6': 10, 
 }
 
 ENTITY_HEALTH = {

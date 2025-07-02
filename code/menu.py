@@ -21,6 +21,9 @@ class Menu:
         self.rect = self.surf.get_rect(left=0, top=0)  #get the rectangle of the image setting the position (0,0 is default)
         self.clock = pygame.time.Clock()
 
+        self.blip_sound = pygame.mixer.Sound('./assets/BLIP.wav')
+        self.select_sound = pygame.mixer.Sound('./assets/SELECT.wav')
+
     #criacao de um metodo para desenhar o texto no menu
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         Font = pygame.font.SysFont(name="OCR A Extended", size=text_size) #cria a fonte
@@ -64,16 +67,19 @@ class Menu:
 
                 if event.type == pygame.KEYDOWN: #check event for pressing a key
                     if event.key == pygame.K_DOWN: #if the key pressed is the down arrow key
+                        self.blip_sound.play()
                         if menu_option < len(MENU_OPTION) - 1: #it is necessary to check the length to no surpass the number of options
                             menu_option += 1 #add 1 to the menu option (counter to navigate through the menu)
                         else:
                             menu_option = 0 #if the menu option is greater than the number of options, reset it to 0
                     if event.key == pygame.K_UP:#same but for the up arrow key
+                        self.blip_sound.play()
                         if menu_option > 0:
                             menu_option -= 1 
                         else:
                             menu_option = len(MENU_OPTION) - 1
                     if event.key == pygame.K_RETURN: #event for pressing the enter key
+                        self.select_sound.play()
                         return MENU_OPTION[menu_option] #return the selected option
 
 

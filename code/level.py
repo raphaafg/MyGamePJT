@@ -15,6 +15,10 @@ from code.player import Player
 
 class Level:
     def __init__(self, window: pygame.Surface, name: str, game_mode: str, player_score:list[int]):
+
+        self.start_img = pygame.image.load('./assets/Start.png').convert_alpha()
+        self.finish_img = pygame.image.load('./assets/Finish.png').convert_alpha()
+
         self.timeout = TIMEOUT_STAGE #ms = 95seconds
         self.total_time = TIMEOUT_STAGE
 
@@ -58,7 +62,7 @@ class Level:
         #adding ENEMY
         pygame.time.set_timer(ENEMY_SPAWN, TIME_ENEMY_SPAWN)  # Set a timer to spawn enemies every 2 seconds
 
-
+        
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP) #100ms
 
     def run(self, player_score:list[int]):
@@ -111,6 +115,8 @@ class Level:
                 fill = pygame.Rect(bar.x,bar.y + (bar.height - h_dist),bar.width,h_dist)
                 pygame.draw.rect(self.window, self.bar_border, bar, 4)
                 pygame.draw.rect(self.window, self.dist_bar_col, fill)
+                self.window.blit(self.start_img,(20,680))
+                self.window.blit(self.finish_img,(20,180))
 
                 #checa vitória ou derrota
                 if self.distance >= self.distance_goal:
@@ -147,8 +153,15 @@ class Level:
                     civ = EntityFactory.get_entity('Civilians', position=(x, y))
                     self.entity_list.append(civ)  
 
-                ##---------TIMEOUT EVENT---------##
+                ##---------TIMEOUT EVENT + score by time---------##
                 if event.type == EVENT_TIMEOUT:
+                    ##----ADDING SCORE BY TIME----#
+                    for ent in self.entity_list:
+                        if ent.name == 'PlayerA0':
+                            ent.score = self.distance*5
+                        if ent.name == 'PlayerB0':
+                            ent.score = self.distance*5
+                    ##----ENDING BY TIMES OUT----##
                     self.timeout -= TIMEOUT_STEP
                     if self.timeout <= 0:  # If the timeout reaches zero, end the level
                         for ent in self.entity_list:
