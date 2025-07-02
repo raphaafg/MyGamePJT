@@ -33,10 +33,10 @@ class EntityFactory: #design pattern factory doesnt need a init
             
             #Player1 factory
             case 'Player1':
-                return Player('PlayerA0', ((WIN_HEIGHT/2-60) , (810)))
-            #Player2 factory
+                return Player('PlayerA0', ((WIN_WIDTH/2-90) , (810)))
+            #Player2 factory    
             case 'Player2':
-                return Player('PlayerB0', ((WIN_HEIGHT/2+60) , (810)))
+                return Player('PlayerB0', ((WIN_WIDTH/2+70) , (810)))
             
             #Enemy1 factory
             case 'Enemy1':

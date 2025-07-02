@@ -19,6 +19,7 @@ class Level:
         self.start_img = pygame.image.load('./assets/Start.png').convert_alpha()
         self.finish_img = pygame.image.load('./assets/Finish.png').convert_alpha()
 
+
         self.timeout = TIMEOUT_STAGE #ms = 95seconds
         self.total_time = TIMEOUT_STAGE
 
@@ -66,6 +67,13 @@ class Level:
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP) #100ms
 
     def run(self, player_score:list[int]):
+        
+        gogo = pygame.mixer.Sound('./assets/GOGO.wav')
+        channel = gogo.play()
+        while channel.get_busy():
+            pygame.time.wait(50)
+
+
         pygame.mixer.music.load('./assets/Sound_Race1.mp3')  # Load the background music for level 1
         pygame.mixer.music.set_volume(1.5)
         pygame.mixer.music.play(loops=-1)
