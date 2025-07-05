@@ -1,5 +1,3 @@
-
-
 import pygame
 from code.control import Control
 from code.level import Level
@@ -13,7 +11,6 @@ class Game:
         pygame.init() # Initialize the pygame library
         pygame.mixer.init() # Initialize the mixer module for sound playback
         self.window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT), pygame.RESIZABLE) # Create a window
-
     def run(self):
         menu = Menu(self.window)
         while True:
@@ -44,5 +41,3 @@ class Game:
             else:
                 pygame.quit() #quit the game closing the window
                 quit()
-
-    

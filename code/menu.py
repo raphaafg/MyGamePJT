@@ -22,6 +22,7 @@ class Menu:
         self.clock = pygame.time.Clock()
 
         self.blip_sound = pygame.mixer.Sound('./assets/BLIP.wav')
+        self.blip_sound.set_volume(0.5)    
         self.select_sound = pygame.mixer.Sound('./assets/SELECT.wav')
 
     #criacao de um metodo para desenhar o texto no menu
@@ -36,7 +37,7 @@ class Menu:
         menu_option = 0
         pygame.mixer_music.load('./assets/Sound_Menu1.wav') # Load the background music for the menu
         pygame.mixer_music.play(loops=-1) # Play the background music in a loop (-1 means loop indefinitely)
-        pygame.mixer_music.set_volume(0.15) 
+        pygame.mixer_music.set_volume(0.08) 
         while True:
 
             ##--------------DRAW---IMAGES--------------##

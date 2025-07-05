@@ -1,4 +1,5 @@
 import pygame
+from code.boost import Boost
 from code.civilians import Civilians
 from code.const import HIT_COOLDOWN, WIN_HEIGHT, WIN_WIDTH
 from code.enemy import Enemy
@@ -22,6 +23,9 @@ class EntityMediator: #design pattern factory doesnt need a init
             if ent.rect.bottom <= 0:
                 ent.health = 0
         if isinstance(ent, EnemyShot):
+            if ent.rect.top > WIN_HEIGHT:
+                ent.health = 0
+        if isinstance (ent, Civilians):
             if ent.rect.top > WIN_HEIGHT:
                 ent.health = 0
             
@@ -59,6 +63,11 @@ class EntityMediator: #design pattern factory doesnt need a init
                 valid_interaction = True
                 EntityMediator._hit_cooldown = HIT_COOLDOWN
                 
+        ##----checkando boosts----##
+        elif isinstance(ent1, Player) and isinstance(ent2, Boost):
+            valid_interaction = True    
+        elif isinstance(ent1, Boost) and isinstance(ent2, Player):
+            valid_interaction = True
         
 
         
@@ -76,6 +85,11 @@ class EntityMediator: #design pattern factory doesnt need a init
                 ent1.last_dmg = ent2.name
                 ent2.last_dmg = ent1.name
 
+                EntityMediator.hp_boost(ent1, ent2)
+
+
+
+                
 
 
                 
@@ -118,3 +132,19 @@ class EntityMediator: #design pattern factory doesnt need a init
                     entity_list.remove(ent)
             elif ent.health <= 0:
                 entity_list.remove(ent)
+
+    
+    @staticmethod
+
+    def hp_boost(ent1,ent2):
+        
+        if isinstance(ent1, Player) and isinstance(ent2, Boost) and ent2.name == 'boost3':
+            ent1.hp()  # aplica o efeito
+            pygame.mixer.Sound('./assets/SELECT.wav').play()
+            ent2.health = 0  # remove o boost da tela
+            return  # já tratou, não precisa aplicar dano
+        elif isinstance(ent2, Player) and isinstance(ent1, Boost) and ent1.name == 'boost3':
+            ent2.hp()  # aplica o efeito
+            pygame.mixer.Sound('./assets/SELECT.wav').play()
+            ent1.health = 0  # remove o boost da tela
+            return  # já tratou, não precisa aplicar dano

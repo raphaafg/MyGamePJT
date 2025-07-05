@@ -5,13 +5,13 @@ import random
 import sys
 import pygame
 from code.background import Background
-from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, ENTITY_SPEED, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2, WIN_POSX_RUA3
+from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, ENTITY_SPEED, EVENT_BOOST_SPAWN, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_BOOST_SPAWN, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2, WIN_POSX_RUA3
 from code.enemy import Enemy
 from code.entity import Entity
 from code.entityFactory import EntityFactory
 from code.entityMediator import EntityMediator
 from code.player import Player
-
+from code.boost import Boost
 
 class Level:
     def __init__(self, window: pygame.Surface, name: str, game_mode: str, player_score:list[int]):
@@ -63,12 +63,16 @@ class Level:
         #adding ENEMY
         pygame.time.set_timer(ENEMY_SPAWN, TIME_ENEMY_SPAWN)  # Set a timer to spawn enemies every 2 seconds
 
+        #adding BOOST
+        pygame.time.set_timer(EVENT_BOOST_SPAWN, TIME_BOOST_SPAWN)
+
         
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP) #100ms
 
     def run(self, player_score:list[int]):
         
         gogo = pygame.mixer.Sound('./assets/GOGO.wav')
+        gogo.set_volume(0.5)
         channel = gogo.play()
         while channel.get_busy():
             pygame.time.wait(50)
@@ -91,7 +95,7 @@ class Level:
                     ent.move()
                     if ent.rect.top >= WIN_HEIGHT-ENTITY_SPEED[self.name]:
                         self.distance += 1
-                        print(f'distancia percorrida = {self.distance}')
+                        #print(f'distancia percorrida = {self.distance}')
 
 
                 elif isinstance(ent, Enemy):
@@ -160,6 +164,17 @@ class Level:
                     y = -200   # começa fora de tela, acima
                     civ = EntityFactory.get_entity('Civilians', position=(x, y))
                     self.entity_list.append(civ)  
+
+                ##---------SPAWN BOOSTER---------##    
+                if event.type == EVENT_BOOST_SPAWN:
+                    x1 = random.randint(WIN_POSX_RUA1, WIN_POSX_RUA2)
+                    x2 = random.randint(WIN_POSX_RUA2, WIN_POSX_RUA3)
+                    x = random.choice([x1, x2])
+                    #print(f'SPAWN AT {x}')
+                    y = -150   # começa fora de tela, acima
+                    BOOST = EntityFactory.get_entity('Boost', position=(x, y))
+                    self.entity_list.append(BOOST)  
+                
 
                 ##---------TIMEOUT EVENT + score by time---------##
                 if event.type == EVENT_TIMEOUT:

@@ -14,7 +14,7 @@ COLOR_WARNINGYELLOW = (255, 209, 0)   # Amarelo alerta — ótimo para pontuaç�
 ENEMY_SPAWN = pygame.USEREVENT + 1 
 EVENT_TIMEOUT = pygame.USEREVENT + 2
 EVENT_CIV_SPAWN = pygame.USEREVENT + 3
-
+EVENT_BOOST_SPAWN = pygame.USEREVENT + 4
 
 ENTITY_SPEED = {
     'MAP01':8,
@@ -35,7 +35,12 @@ ENTITY_SPEED = {
     'CIVILIAN3': 12, 
     'CIVILIAN4':10, 
     'CIVILIAN5': 10, 
-    'CIVILIAN6': 10, 
+    'CIVILIAN6': 10,
+    'boost0': 7,
+    'boost1': 7, 
+    'boost2': 7, 
+    'boost3': 7, 
+    'boost4': 7,  
 }
 
 ENTITY_HEALTH = {
@@ -43,9 +48,9 @@ ENTITY_HEALTH = {
     'Map20': 999,
     'Map11': 999,
     'Map21': 999,
-    'PlayerA0': 300,
+    'PlayerA0': 400,
     'PlayerA0Shot': 1,
-    'PlayerB0': 300,
+    'PlayerB0': 400,
     'PlayerB0Shot': 1,
     'Enemy1': 40,
     'Enemy2': 65,
@@ -57,6 +62,11 @@ ENTITY_HEALTH = {
     'CIVILIAN4': 999, 
     'CIVILIAN5': 999, 
     'CIVILIAN6': 999, 
+    'boost0': 999,
+    'boost1': 999, 
+    'boost2': 999, 
+    'boost3': 999, 
+    'boost4': 999,  
 }
 
 ENTITY_SHOT_DELAY = {
@@ -77,14 +87,19 @@ ENTITY_DAMAGE = {
     'Enemy2': 999,
     'PlayerA0Shot': 999,
     'PlayerB0Shot': 999,
-    'Enemy1Shot': 40,
-    'Enemy2Shot': 40,
+    'Enemy1Shot': 30,
+    'Enemy2Shot': 30,
     'CIVILIAN1': 35, 
     'CIVILIAN2': 15, 
     'CIVILIAN3': 15, 
     'CIVILIAN4': 15, 
     'CIVILIAN5': 15, 
-    'CIVILIAN6': 15, 
+    'CIVILIAN6': 15,
+    'boost0': 0,
+    'boost1': 0, 
+    'boost2': 0, 
+    'boost3': 0, 
+    'boost4': 0,   
 }
 
 ENTITY_SCORE = {
@@ -105,7 +120,12 @@ ENTITY_SCORE = {
     'CIVILIAN3': -10, 
     'CIVILIAN4': -10, 
     'CIVILIAN5': -10, 
-    'CIVILIAN6': -10, 
+    'CIVILIAN6': -10,
+    'boost0': 13,
+    'boost1': 13, 
+    'boost2': 13, 
+    'boost3': 13, 
+    'boost4': 13, 
 }
 
 #F
@@ -114,7 +134,7 @@ FONT_OPTION_SIZE = 18  #Font size for the menu options
 FONT_HUD_SIZE = 20 #Font size for HUD
 
 #H
-HIT_COOLDOWN = 15 #Cool down for hits between entities (cars)
+HIT_COOLDOWN = 20 #Cool down for hits between entities (cars)
 
 #M
 MENU_OPTION = ( 'NEW GAME - 1P > ARCADE',
@@ -129,10 +149,10 @@ PLAYER_KEY_UP = {'PlayerA0': pygame.K_UP, 'PlayerB0': pygame.K_w}
 PLAYER_KEY_DOWN = {'PlayerA0': pygame.K_DOWN, 'PlayerB0': pygame.K_s}
 PLAYER_KEY_LEFT = {'PlayerA0': pygame.K_LEFT, 'PlayerB0': pygame.K_a,'Enemy1': pygame.K_LEFT}
 PLAYER_KEY_RIGHT = {'PlayerA0': pygame.K_RIGHT, 'PlayerB0': pygame.K_d, 'Enemy1': pygame.K_RIGHT}
-PLAYER_KEY_SHOOT = {'PlayerA0': pygame.K_SPACE, 'PlayerB0': pygame.K_LSHIFT}
+PLAYER_KEY_BOOST = {'PlayerA0': pygame.K_SPACE, 'PlayerB0': pygame.K_LSHIFT}
 PLAYER_KEY_CANCEL = {'PlayerA0': pygame.K_RCTRL, 'PlayerB0': pygame.K_LCTRL}  
 
-PROGRESSO_CHEGADA = 300 #Numero de Bg que devem ser decontados par ao final do jogo
+PROGRESSO_CHEGADA = 100 #Numero de Bg que devem ser decontados par ao final do jogo
 PROGRESSO_LARGADA = 0 #Numero de inicio do contador
 PROGRESSO_COUNT = 0
 
@@ -141,12 +161,13 @@ PROGRESSO_COUNT = 0
 #T
 TIME_ENEMY_SPAWN = 25000 
 TIMEOUT_STEP = 100  #0.1s
-TIMEOUT_STAGE = 120000  #90s
+TIMEOUT_STAGE = 100000  #90s
 TIME_CIVILIAN_SPAWN = 5500
+TIME_BOOST_SPAWN = 15000
 
 #W
-WIN_WIDTH = 700
-WIN_HEIGHT = 1000
+WIN_WIDTH = 560 #700
+WIN_HEIGHT = 800 #1000
 
 WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 100),
                  'EnterName': (WIN_WIDTH/2, 140),
@@ -171,8 +192,8 @@ WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 100),
 
 }
 
-WIN_POSX_RUA1 = 100
+WIN_POSX_RUA1 = 90 #100
 WIN_POSX_RUA2 = int(WIN_WIDTH / 2)
-WIN_POSX_RUA3 = 600
+WIN_POSX_RUA3 = 460 #600
 
 

@@ -22,8 +22,8 @@ class Control:
         self.window.blit(source=self.surf, dest=self.rect)
         while True:
             self.control_text(FONT_TITLE_SIZE, "CONTROL", COLOR_FLAME, WIN_SCORE_POS['Title'] )
-            self.control_text(30, "PLAYER 1", COLOR_TURBOGREEN,text_center_pos=((WIN_WIDTH/2)-190, 400))
-            self.control_text(30, "PLAYER 2", COLOR_WARNINGYELLOW,text_center_pos=((WIN_WIDTH/2)+190, 160))
+            self.control_text(30, "PLAYER 1", COLOR_TURBOGREEN,text_center_pos=((WIN_WIDTH/2)-170, 300))
+            self.control_text(30, "PLAYER 2", COLOR_WARNINGYELLOW,text_center_pos=((WIN_WIDTH/2)+170, 520))
             self.control_text(20, "Pess any key to return to Menu", COLOR_FLAME,text_center_pos=((WIN_WIDTH/2), WIN_HEIGHT-30))
             pygame.display.flip()
             for event in pygame.event.get():

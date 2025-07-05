@@ -3,6 +3,7 @@
 
 import random
 from code.background import Background
+from code.boost import Boost
 from code.civilians import Civilians
 from code.const import WIN_HEIGHT, WIN_WIDTH
 from code.enemy import Enemy
@@ -33,10 +34,10 @@ class EntityFactory: #design pattern factory doesnt need a init
             
             #Player1 factory
             case 'Player1':
-                return Player('PlayerA0', ((WIN_WIDTH/2-90) , (810)))
+                return Player('PlayerA0', ((WIN_WIDTH/2-90) , (650)))
             #Player2 factory    
             case 'Player2':
-                return Player('PlayerB0', ((WIN_WIDTH/2+70) , (810)))
+                return Player('PlayerB0', ((WIN_WIDTH/2+70) , (650)))
             
             #Enemy1 factory
             case 'Enemy1':
@@ -50,6 +51,11 @@ class EntityFactory: #design pattern factory doesnt need a init
                 i = random.randint(1,6)
                 sprite_name = f'CIVILIAN{i}'
                 return Civilians(sprite_name,position)
+            
+            case 'Boost':
+                i = random.randint(1,5)
+                sprite_name = f'boost{i}'
+                return Boost (sprite_name,position)
 
 
             

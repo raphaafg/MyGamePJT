@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pygame
-from code.const import ENTITY_SHOT_DELAY, ENTITY_SPEED, PLAYER_KEY_DOWN, PLAYER_KEY_LEFT, PLAYER_KEY_RIGHT, PLAYER_KEY_SHOOT, PLAYER_KEY_UP, WIN_HEIGHT, WIN_WIDTH
+from code.const import ENTITY_HEALTH, ENTITY_SHOT_DELAY, ENTITY_SPEED, PLAYER_KEY_DOWN, PLAYER_KEY_LEFT, PLAYER_KEY_RIGHT, PLAYER_KEY_BOOST, PLAYER_KEY_UP, WIN_HEIGHT, WIN_WIDTH
 from code.entity import Entity
 from code.playerShot import PlayerShot
 
@@ -34,6 +34,10 @@ class Player(Entity):
         if self.shot_delay == 0:
             self.shot_delay = ENTITY_SHOT_DELAY[self.name]
             pressed_key = pygame.key.get_pressed()
-            if pressed_key[PLAYER_KEY_SHOOT[self.name]]:
+            if pressed_key[PLAYER_KEY_BOOST[self.name]]:
                 self.shot_sound.play()
                 return PlayerShot(name=f"{self.name}Shot", position=(self.rect.centerx, self.rect.centery))
+            
+    def hp(self):
+        self.health = ENTITY_HEALTH[self.name]
+        print('VIDAAAAAAAAA')
