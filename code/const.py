@@ -150,8 +150,8 @@ PLAYER_KEY_UP = {'PlayerA0': pygame.K_UP, 'PlayerB0': pygame.K_w}
 PLAYER_KEY_DOWN = {'PlayerA0': pygame.K_DOWN, 'PlayerB0': pygame.K_s}
 PLAYER_KEY_LEFT = {'PlayerA0': pygame.K_LEFT, 'PlayerB0': pygame.K_a,'Enemy1': pygame.K_LEFT}
 PLAYER_KEY_RIGHT = {'PlayerA0': pygame.K_RIGHT, 'PlayerB0': pygame.K_d, 'Enemy1': pygame.K_RIGHT}
-PLAYER_KEY_BOOST = {'PlayerA0': pygame.K_SPACE, 'PlayerB0': pygame.K_LSHIFT}
-PLAYER_KEY_CANCEL = {'PlayerA0': pygame.K_RCTRL, 'PlayerB0': pygame.K_LCTRL}  
+PLAYER_KEY_BOOST = {'PlayerA0': pygame.K_SPACE, 'PlayerB0': pygame.K_g}
+
 
 PROGRESSO_CHEGADA = 70 #Numero de Bg que devem ser decontados par ao final do jogo
 PROGRESSO_LARGADA = 0 #Numero de inicio do contador
