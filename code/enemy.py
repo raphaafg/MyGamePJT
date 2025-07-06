@@ -19,6 +19,13 @@ class Enemy(Entity):
         self.shot_sound.set_volume(0.3)  # Set the volume for the shot sound
 
 
+        # SIRENE
+        self.siren_channel = pygame.mixer.Channel(5)  # usa canal específico para sirene
+        self.siren_sound = pygame.mixer.Sound('./assets/Sound_siren.wav')
+        self.siren_sound.set_volume(0.5)
+        self.siren_channel.play(self.siren_sound, loops=-1)  # loop infinito
+
+
 
     def move(self, ): 
         self.rect.centery += ENTITY_SPEED[self.name]                

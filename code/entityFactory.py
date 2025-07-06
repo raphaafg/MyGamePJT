@@ -53,11 +53,10 @@ class EntityFactory: #design pattern factory doesnt need a init
                 return Civilians(sprite_name,position)
             
             case 'Boost':
-                i = random.randint(1,5)
+                i = random.randint(0,4)
                 sprite_name = f'boost{i}'
                 return Boost (sprite_name,position)
-
-
             
-            
+            case 'Gun':
+                return Boost('boost2', position)   
             

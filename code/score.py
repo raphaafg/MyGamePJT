@@ -52,20 +52,20 @@ class Score:
             # Determine score and prompt text based on game mode
             if game_mode == MENU_OPTION[0]: #GAME FOR 1P
                 score = player_score[0]
-                text = 'Player 1, enter your name (4 char) and press ENTER:'
+                text = 'Player 1, enter your name (4 char):'
             elif game_mode == MENU_OPTION[1]: #GAME FOR 2P COOP
                 score = ((player_score[0]+player_score[1])/2)
-                text = 'Players, enter your team name (4 char) and press ENTER:'
+                text = 'Players, enter your team name (4 char):'
             elif game_mode == MENU_OPTION[2]: #GAME FOR 2P VS
                 if player_score[0] > player_score[1]:
                     score = player_score[0]
-                    text = 'Player 1, enter your name (4 char) and press ENTER:'
+                    text = 'Player 1, enter your name (4 char):'
                 elif player_score[0] < player_score[1]:
                     score = player_score[1]
-                    text = 'Player 2, enter your name (4 char) and press ENTER:'
+                    text = 'Player 2, enter your name (4 char):'
                 else:  
                     score = player_score[0]
-                    text = 'DRAW!!!!, enter your team name (4 char) and press ENTER:'
+                    text = 'DRAW!!!!, enter your team name (4 char):'
 
             # Redraw only if input or prompt text has changed, or after an event
             if updated or namePlay != prev_namePlay or text != prev_text:

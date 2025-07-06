@@ -18,9 +18,10 @@ EVENT_BOOST_SPAWN = pygame.USEREVENT + 4
 
 ENTITY_SPEED = {
     'MAP01':8,
+    'MAP02':8,
     'Map10': 8,
-    'Map20': 5,
-    'Map11': 8,
+    'Map20': 8,
+    'Map11': 9,
     'Map21': 7,
     'PlayerA0':7,
     'PlayerB0':7,
@@ -152,18 +153,18 @@ PLAYER_KEY_RIGHT = {'PlayerA0': pygame.K_RIGHT, 'PlayerB0': pygame.K_d, 'Enemy1'
 PLAYER_KEY_BOOST = {'PlayerA0': pygame.K_SPACE, 'PlayerB0': pygame.K_LSHIFT}
 PLAYER_KEY_CANCEL = {'PlayerA0': pygame.K_RCTRL, 'PlayerB0': pygame.K_LCTRL}  
 
-PROGRESSO_CHEGADA = 100 #Numero de Bg que devem ser decontados par ao final do jogo
+PROGRESSO_CHEGADA = 70 #Numero de Bg que devem ser decontados par ao final do jogo
 PROGRESSO_LARGADA = 0 #Numero de inicio do contador
 PROGRESSO_COUNT = 0
 
 
 
 #T
-TIME_ENEMY_SPAWN = 25000 
+TIME_ENEMY_SPAWN = 20000 
 TIMEOUT_STEP = 100  #0.1s
-TIMEOUT_STAGE = 100000  #90s
-TIME_CIVILIAN_SPAWN = 5500
-TIME_BOOST_SPAWN = 15000
+TIMEOUT_STAGE = 85000  #90s
+TIME_CIVILIAN_SPAWN = 3500
+TIME_BOOST_SPAWN = 14000
 
 #W
 WIN_WIDTH = 560 #700
@@ -192,8 +193,8 @@ WIN_SCORE_POS = { 'Title': (WIN_WIDTH/2, 100),
 
 }
 
-WIN_POSX_RUA1 = 90 #100
+WIN_POSX_RUA1 = 100 #100
 WIN_POSX_RUA2 = int(WIN_WIDTH / 2)
-WIN_POSX_RUA3 = 460 #600
+WIN_POSX_RUA3 = 450 #600
 
 

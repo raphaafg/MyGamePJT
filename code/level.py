@@ -5,7 +5,7 @@ import random
 import sys
 import pygame
 from code.background import Background
-from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, ENTITY_SPEED, EVENT_BOOST_SPAWN, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_BOOST_SPAWN, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2, WIN_POSX_RUA3
+from code.const import COLOR_BLUESKY, COLOR_FLAME, COLOR_JET, COLOR_TURBOBLUE, COLOR_TURBOGREEN, COLOR_FLAME, COLOR_WHITE, ENEMY_SPAWN, ENTITY_SPEED, EVENT_BOOST_SPAWN, EVENT_CIV_SPAWN, EVENT_TIMEOUT, MENU_OPTION, PROGRESSO_CHEGADA, PROGRESSO_LARGADA, TIME_BOOST_SPAWN, TIME_CIVILIAN_SPAWN, TIME_ENEMY_SPAWN, TIMEOUT_STAGE, TIMEOUT_STEP, WIN_HEIGHT, WIN_POSX_RUA1, WIN_POSX_RUA2, WIN_POSX_RUA3
 from code.enemy import Enemy
 from code.entity import Entity
 from code.entityFactory import EntityFactory
@@ -95,7 +95,12 @@ class Level:
                     ent.move()
                     if ent.rect.top >= WIN_HEIGHT-ENTITY_SPEED[self.name]:
                         self.distance += 1
-                        #print(f'distancia percorrida = {self.distance}')
+                        ##----ADDING SCORE BY "TIME"----#
+                        for ent in self.entity_list:
+                            if ent.name == 'PlayerA0':
+                                ent.score += 5
+                            if ent.name == 'PlayerB0':
+                                ent.score += 5
 
 
                 elif isinstance(ent, Enemy):
@@ -104,17 +109,23 @@ class Level:
                     ent.move()
 
                 self.window.blit(source=ent.surf, dest=ent.rect)  # Draw each entity on the window
+                if isinstance(ent, Player) and ent.boost_invincible_timer > 0:
+                    nitro_rect = ent.boost_nitro_img.get_rect(midtop=(ent.rect.centerx, ent.rect.bottom))
+                    self.window.blit(ent.boost_nitro_img, nitro_rect)
+
 
                 if isinstance(ent,(Player, Enemy)):
                     shoot = ent.shoot()  # If the entity is a player or enemy, check if it can shoot
                     if shoot is not None:
                         self.entity_list.append(shoot) # Add the shot to the entity list if it exists
                 
-                ##---------SHOW HEALTH OF PLAYERS---------##
+                ##---------SHOW HUD---------##
                 if ent.name == 'PlayerA0':
-                    self.level_text( 14, f'Player 1 -    Health: {ent.health}    Score: {ent.score}', COLOR_BLUESKY,(10, 20))             
+                    self.level_text( 14, f'Player 1 -    Health: {ent.health}    Score: {ent.score}    Ammo: {ent.shot_limit}', COLOR_JET,(10, 20))             
                 if ent.name == 'PlayerB0':
-                    self.level_text( 14, f'Player 2 -    Health: {ent.health}    Score: {ent.score}', COLOR_FLAME,(10, 35))
+                    self.level_text( 14, f'Player 2 -    Health: {ent.health}    Score: {ent.score}    Ammo: {ent.shot_limit}', COLOR_FLAME,(10, 35))
+               
+
 
 
 
@@ -130,11 +141,17 @@ class Level:
                 self.window.blit(self.start_img,(20,680))
                 self.window.blit(self.finish_img,(20,180))
 
-                #checa vitória ou derrota
+                #checa vitória por distancia
                 if self.distance >= self.distance_goal:
+                    for ent in self.entity_list:
+                            if ent.name == 'PlayerA0':
+                                ent.score += ent.health  # Add the remaining health to the score
+                                player_score[0] = ent.score
+                            if ent.name == 'PlayerB0':
+                                ent.score += ent.health  # Add the remaining health to the score
+                                player_score[1] = ent.score
                     return True   # chegou na linha de chegada antes do tempo: GANHOU
-                if self.timeout <= 0:
-                    return False  # acabou o tempo antes da chegada: PERDEU
+                
 
 
                 
@@ -152,8 +169,10 @@ class Level:
                     px = self.player.rect.centerx
                     enemy = EntityFactory.get_entity('Enemy1',(px,-200))
                     self.entity_list.append(enemy)
-                    #choice = random.choice(['Enemy1', 'Enemy2'])  # Randomly choose an enemy type to spawn
-                    #self.entity_list.append(EntityFactory.get_entity(choice))  #add a random enemy to the entity list
+                    
+                    #SPAWNA GUN TBM
+                    gun_boost = EntityFactory.get_entity('Gun', (px, -50))
+                    self.entity_list.append(gun_boost)
                 
                 ##---------SPAWN CIVILIANS---------##    
                 if event.type == EVENT_CIV_SPAWN:
@@ -178,23 +197,13 @@ class Level:
 
                 ##---------TIMEOUT EVENT + score by time---------##
                 if event.type == EVENT_TIMEOUT:
-                    ##----ADDING SCORE BY TIME----#
-                    for ent in self.entity_list:
-                        if ent.name == 'PlayerA0':
-                            ent.score = self.distance*5
-                        if ent.name == 'PlayerB0':
-                            ent.score = self.distance*5
                     ##----ENDING BY TIMES OUT----##
                     self.timeout -= TIMEOUT_STEP
                     if self.timeout <= 0:  # If the timeout reaches zero, end the level
                         for ent in self.entity_list:
-                            if ent.name == 'PlayerA0':
-                                ent.score += ent.health  # Add the remaining health to the score
-                                player_score[0] = ent.score
-                            if ent.name == 'PlayerB0':
-                                ent.score += ent.health  # Add the remaining health to the score
-                                player_score[1] = ent.score
-                        return True  # Return True to indicate the level is finished
+                            if isinstance(ent,Enemy):
+                                ent.siren_channel.stop()
+                        return False
                     
             
 
@@ -205,6 +214,9 @@ class Level:
                         found_player = True
                 if not found_player:
                     print('GAME OVER')
+                    for ent in self.entity_list:
+                        if isinstance(ent,Enemy):
+                            ent.siren_channel.stop()
                     return False       
 
 
